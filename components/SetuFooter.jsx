@@ -51,6 +51,7 @@ export default function SetuFooter() {
         <div>
           <h4>{isHi ? "प्रमुख सेवाएं" : "Core Services"}</h4>
           <Link href="/triage">{isHi ? "प्राथमिक लक्षण जांच" : "Advisory Symptom Triage"}</Link>
+          <Link href="/lump-triage">{isHi ? "गांठ / लिपोमा RAG मूल्यांकन" : "Lump & Lipoma RAG Triage"}</Link>
           <Link href="/booking">{isHi ? "क्लीनिक समय बुकिंग" : "Clinic Appointment Booking"}</Link>
           <Link href="/facilities">{isHi ? "नजदीकी स्वास्थ्य केंद्र" : "Nearby PHC / CHC Directory"}</Link>
           <Link href="/records">{isHi ? "डिजिटल स्वास्थ्य रिकॉर्ड" : "Longitudinal FHIR Health Records"}</Link>

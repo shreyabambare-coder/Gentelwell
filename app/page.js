@@ -192,6 +192,20 @@ export default function SetuHomePage() {
               <span className="action-label">{isHi ? "लक्षण जांचें" : "Check Symptoms"}</span>
             </Link>
 
+            <Link href="/lump-triage" className="icon-action-card">
+              <span className="action-icon-badge">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="m4.93 4.93 4.24 4.24"/>
+                  <path d="m14.83 9.17 4.24-4.24"/>
+                  <path d="m14.83 14.83 4.24 4.24"/>
+                  <path d="m9.17 14.83-4.24 4.24"/>
+                  <circle cx="12" cy="12" r="4"/>
+                </svg>
+              </span>
+              <span className="action-label">{isHi ? "गांठ / लिपोमा RAG" : "Lump & Lipoma RAG"}</span>
+            </Link>
+
             <Link href="/booking" className="icon-action-card">
               <span className="action-icon-badge">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

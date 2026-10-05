@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import SetuHeader from "../../components/SetuHeader";
 import SetuFooter from "../../components/SetuFooter";
 import { TRIAGE_RULES } from "../../lib/setuData";
@@ -14,14 +15,28 @@ export default function TriagePage() {
   const [escalated, setEscalated] = useState(false);
   const [lang, setLang] = useState("en");
 
+  const isHi = lang === "hi";
+
   // Check query params if ?mode=emergency was clicked from home
   useEffect(() => {
+    try {
+      const saved = localStorage.getItem("setu_lang");
+      if (saved) setLang(saved);
+    } catch {}
+
+    const handleLang = (e) => {
+      if (e.detail?.lang) setLang(e.detail.lang);
+    };
+    window.addEventListener("setu_lang_change", handleLang);
+
     if (typeof window !== "undefined") {
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.get("mode") === "emergency") {
         handleRuleSelect("obstetric_hemorrhage");
       }
     }
+
+    return () => window.removeEventListener("setu_lang_change", handleLang);
   }, []);
 
   const handleRuleSelect = (ruleId) => {
@@ -127,6 +142,42 @@ export default function TriagePage() {
             <b>Advisory Only — Never outputs a diagnosis.</b> Evaluates symptoms against hardcoded clinical 
             safety rules and directs you to self-care, a clinic visit, or immediate emergency care.
           </p>
+        </div>
+
+        {/* Specialized Grounded Medical RAG Lump & Lipoma Triage Card */}
+        <div
+          style={{
+            maxWidth: "900px",
+            margin: "0 auto 32px",
+            background: "linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%)",
+            border: "1.5px solid #0284c7",
+            borderRadius: "16px",
+            padding: "20px 24px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: "16px"
+          }}
+        >
+          <div style={{ maxWidth: "620px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
+              <span style={{ fontSize: "20px" }}>🔬</span>
+              <b style={{ color: "#0369a1", fontSize: "15px" }}>
+                {isHi ? "नया: गांठ एवं लिपोमा क्लिनिकल आरएजी मूल्यांकन (मेयो क्लिनिक एवं एनआईएच)" : "NEW: Grounded Medical RAG Triage for Lumps & Lipomas"}
+              </b>
+            </div>
+            <p style={{ margin: 0, fontSize: "13px", color: "#0f172a", lineHeight: "1.5" }}>
+              Have a lump, soft tissue bump, or painful swelling? Evaluate texture, mobility, pain scale (angiolipoma indicator), and puncture signs against peer-reviewed surgical data from <b>Mayo Clinic, NIH StatPearls, and Cleveland Clinic</b>.
+            </p>
+          </div>
+          <Link
+            href="/lump-triage"
+            className="button"
+            style={{ background: "#0284c7", color: "#fff", whiteSpace: "nowrap", padding: "10px 18px" }}
+          >
+            Open Lump RAG Triage →
+          </Link>
         </div>
 
         {/* Quick Common Rural Symptoms Selector */}

@@ -230,6 +230,9 @@ export default function SetuHeader() {
             <Link href="/triage" onClick={() => setOpen(false)}>
               {isHi ? "लक्षण जांच" : "Triage AI"}
             </Link>
+            <Link href="/lump-triage" onClick={() => setOpen(false)}>
+              {isHi ? "गांठ / लिपोमा RAG" : "Lump RAG"}
+            </Link>
             <Link href="/booking" onClick={() => setOpen(false)}>
               {isHi ? "अपॉइंटमेंट" : "Book Visit"}
             </Link>
