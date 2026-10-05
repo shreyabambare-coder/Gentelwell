@@ -72,6 +72,16 @@ Gentelwell sequences healthcare delivery around a proven core loop:
 
 ---
 
+## 📚 Project Documentation
+
+Detailed enterprise-grade engineering, clinical, and regulatory dossiers are available in the `/docs` directory:
+- [**System Architecture Document**](docs/ARCHITECTURE.md): System design, 3-tier channel degradation, offline-first sync engine & conflict resolution.
+- [**REST v1 & FHIR R4 API Specification**](docs/API_SPECIFICATION.md): Standard envelopes, DPDP purpose-of-use headers, idempotency keys, and 2G payload shaping.
+- [**Clinical Protocols & Medical RAG Specification**](docs/CLINICAL_RAG_TRIAGE.md): Emergency red flags, soft tissue lump vector retrieval, differential diagnostic criteria, and Mayo Clinic / NIH citations.
+- [**Data Privacy & DPDP Compliance Dossier**](docs/DPDP_COMPLIANCE.md): Digital Personal Data Protection Act 2023 legal baseline, versioned consent, immutable audit trail, and SaMD exemption.
+
+---
+
 ## 💻 Getting Started Locally
 
 ```bash
