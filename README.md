@@ -1,6 +1,20 @@
-# Gentelwell (Setu Health / Sakhi App)
-> **Integrated Online + Offline Rural Healthcare Platform**  
-> A prioritized, multi-channel, offline-first digital health web application serving rural and low-resource communities across Maharashtra.
+# Sanketika (सांकेतिका) · Gentelwell
+> **Integrated Online + Offline Women's Healthcare & Maternal Support Platform**  
+> Serving rural, tribal, and low-resource communities across Maharashtra with offline-first PWA, bilingual Sakhi AI triage, and 3-tier SMS/IVR degradation.
+
+[![Live Production](https://img.shields.io/badge/Live%20Demo-sanketika--ten.vercel.app-7551a6?style=for-the-badge&logo=vercel&logoColor=white)](https://sanketika-ten.vercel.app)
+[![Deploy Status](https://img.shields.io/badge/Vercel-Deployed-success?style=for-the-badge&logo=vercel)](https://sanketika-ten.vercel.app)
+[![Next.js 16](https://img.shields.io/badge/Next.js-16.3.5-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
+
+---
+
+### 🌐 Live Production Links
+* **Live Web Application:** **[https://sanketika-ten.vercel.app](https://sanketika-ten.vercel.app)**
+* **Interactive Mobile Simulator:** **[https://sanketika-ten.vercel.app/mobile](https://sanketika-ten.vercel.app/mobile)**
+* **Sakhi AI Health Chatbot:** **[https://sanketika-ten.vercel.app/chatbot](https://sanketika-ten.vercel.app/chatbot)**
+* **Symptom Triage (Sakhi AI):** **[https://sanketika-ten.vercel.app/triage](https://sanketika-ten.vercel.app/triage)**
+* **Lump Check:** **[https://sanketika-ten.vercel.app/lump-triage](https://sanketika-ten.vercel.app/lump-triage)**
+* **Alternate Domain:** **[https://sanketika-shreyabambare-1309.vercel.app](https://sanketika-shreyabambare-1309.vercel.app)**
 
 ---
 
@@ -100,3 +114,13 @@ npm run build
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 🚀 Live Production Deployment
+
+The platform is deployed globally on Vercel:
+* **Production URL:** [https://sanketika-ten.vercel.app](https://sanketika-ten.vercel.app)
+* **Alternate Domain:** [https://sanketika-shreyabambare-1309.vercel.app](https://sanketika-shreyabambare-1309.vercel.app)
+* **Hosting Platform:** Vercel Global Edge Network (Mumbai `bom1` POP)
+* **Framework:** Next.js 16 (App Router) & React 19
