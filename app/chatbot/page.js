@@ -901,7 +901,7 @@ Please note that for urgent symptoms or emergency care, please contact local eme
                       {m.who === "bot" ? (
                         renderMarkdown(activeText)
                       ) : (
-                        <p style={{ margin: 0 }}>{activeText}</p>
+                        <p style={{ margin: 0, color: "#ffffff", whiteSpace: "pre-wrap" }}>{activeText}</p>
                       )}
 
                       {/* Emergency Red Flag Alert Box */}

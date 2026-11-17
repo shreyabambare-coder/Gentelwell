@@ -92,7 +92,7 @@ export default function BookingPage() {
       <SetuHeader />
       <main className="container" style={{ padding: "40px 0 80px" }}>
         <div style={{ textAlign: "center", marginBottom: "32px" }}>
-          <p className="eyebrow">MULTI-CHANNEL CLINIC SCHEDULING (§3.3)</p>
+          <p className="eyebrow">MULTI-CHANNEL CLINIC SCHEDULING</p>
           <h1>Book a Healthcare Visit</h1>
           <p style={{ maxWidth: "620px", margin: "8px auto 0" }}>
             Real-time appointment scheduling across partner health facilities.

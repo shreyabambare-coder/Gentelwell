@@ -4,20 +4,29 @@ import { CLINICAL_TOPICS, RESEARCH_CITATIONS } from "./medicalKnowledge";
 // Deterministic safety & clinical matching engine
 function matchClinicalKnowledge(query, lang = "en") {
   const normalized = query.toLowerCase().trim();
+  const hasDevanagari = /[\u0900-\u097F]/.test(query);
+  const effectiveLang = hasDevanagari ? "hi" : lang;
 
   // 1. Critical Red Flag Triage (Emergency Safety Layer)
   const emergencyKeywords = [
-    "soaking", "soaked", "heavy bleeding", "large clot", "golf ball",
-    "severe abdominal", "severe pelvic", "fainting", "fainted",
-    "bleeding pregnant", "bleeding while pregnant", "miscarriage",
-    "ectopic", "khoon beh raha", "bahut bleeding", "behosh", "ek taraf dard"
+    // English keywords
+    "soaking", "soaked", "heavy bleeding", "large clot", "golf ball", "golf-ball",
+    "severe abdominal", "severe pelvic", "fainting", "fainted", "dizziness bleeding",
+    "bleeding pregnant", "bleeding while pregnant", "pregnant bleeding", "miscarriage",
+    "ectopic", "hemorrhage", "haemorrhage", "loss of consciousness",
+    // Hinglish keywords
+    "khoon beh raha", "bahut bleeding", "behosh", "ek taraf dard", "bahut zyada khoon",
+    "chakkar behosh", "chakkar aake girna", "tez dard pet me",
+    // Hindi Devanagari keywords
+    "खून बह रहा", "बहुत खून", "ज्यादा ब्लीडिंग", "भारी रक्तस्राव", "बेहोश", "चक्कर आकर गिर",
+    "गर्भावस्था में खून", "गर्भावस्था में ब्लीडिंग", "गर्भपात", "पेट में तेज दर्द", "अत्यधिक रक्तस्राव"
   ];
 
   const isEmergency = emergencyKeywords.some((kw) => normalized.includes(kw));
   if (isEmergency) {
     const redFlag = CLINICAL_TOPICS.find((t) => t.id === "emergency_red_flags");
     return {
-      reply: lang === "hi" ? redFlag.hindiContent : redFlag.content,
+      reply: effectiveLang === "hi" ? redFlag.hindiContent : redFlag.content,
       hindiReply: redFlag.hindiContent,
       englishReply: redFlag.content,
       suggestions: redFlag.suggestions,
@@ -27,15 +36,24 @@ function matchClinicalKnowledge(query, lang = "en") {
     };
   }
 
-  // 2. Score against clinical topics
+  // 2. Score against clinical topics using phrase + multi-token matching
   let bestTopic = null;
   let highestScore = 0;
 
   for (const topic of CLINICAL_TOPICS) {
     let score = 0;
     for (const trigger of topic.triggers) {
-      if (normalized.includes(trigger.toLowerCase())) {
-        score += trigger.length;
+      const triggerLower = trigger.toLowerCase();
+
+      // Exact phrase match (highest weight)
+      if (normalized.includes(triggerLower)) {
+        score += triggerLower.length * 3;
+      } else {
+        // Multi-word token co-occurrence (for queries like "burning sensation when peeing")
+        const tokens = triggerLower.split(/\s+/).filter((t) => t.length > 2);
+        if (tokens.length > 1 && tokens.every((t) => normalized.includes(t))) {
+          score += triggerLower.length * 2;
+        }
       }
     }
     if (score > highestScore) {
@@ -46,7 +64,7 @@ function matchClinicalKnowledge(query, lang = "en") {
 
   if (bestTopic && highestScore > 0) {
     return {
-      reply: lang === "hi" ? bestTopic.hindiContent : bestTopic.content,
+      reply: effectiveLang === "hi" ? bestTopic.hindiContent : bestTopic.content,
       hindiReply: bestTopic.hindiContent,
       englishReply: bestTopic.content,
       suggestions: bestTopic.suggestions,
@@ -57,13 +75,16 @@ function matchClinicalKnowledge(query, lang = "en") {
   }
 
   // 3. Conversational greetings
-  const greetings = ["hi", "hello", "hey", "namaste", "halo", "namaskar", "good morning", "good evening", "kaise ho", "kya haal hai"];
+  const greetings = [
+    "hi", "hello", "hey", "namaste", "halo", "namaskar", "good morning", "good evening",
+    "kaise ho", "kya haal hai", "नमस्ते", "नमस्कार", "हेलो", "हाय"
+  ];
   if (greetings.some((g) => normalized === g || normalized.startsWith(g + " "))) {
     const greetingTextHi = `नमस्ते! 🙏 मैं **सखी (SheCare AI)** हूँ - महिला स्वास्थ्य और पोषण की आपकी निजी, साक्ष्य-आधारित (Evidence-Based) सहायक।\n\nमैं ICMR, WHO एवं ACOG के चिकित्सा मानकों के आधार पर आपको सही जानकारी प्रदान करती हूँ। आप मुझसे माहवारी, पीरियड्स में दर्द, PCOS, आयरन व एनीमिया, गर्भावस्था, या व्यक्तिगत स्वच्छता पर खुलकर चर्चा कर सकती हैं।\n\nआज मैं आपकी क्या सहायता कर सकती हूँ?`;
     const greetingTextEn = `Hello! 🌸 I am **Sakhi (SheCare AI)** — your confidential, evidence-based Women's Health Education Assistant.\n\nMy guidance is grounded in clinical research and guidelines from the **ICMR-NIN (National Institute of Nutrition)**, **WHO**, **ACOG**, and **2023 International PCOS Guidelines**.\n\nYou can ask me about **menstrual cycles, cramps, PCOS/PCOD, iron & hemoglobin, pregnancy care, intimate hygiene, or emotional wellbeing**.\n\nWhat health question can I help you explore today?`;
 
     return {
-      reply: lang === "hi" ? greetingTextHi : greetingTextEn,
+      reply: effectiveLang === "hi" ? greetingTextHi : greetingTextEn,
       hindiReply: greetingTextHi,
       englishReply: greetingTextEn,
       suggestions: [
@@ -102,7 +123,7 @@ Could you please specify your symptoms, cycle details, or the health condition y
 कृपया मुझे अपने प्रश्न या लक्षण के बारे में थोड़ा और बताएं।`;
 
   return {
-    reply: lang === "hi" ? generalReplyHi : generalReplyEn,
+    reply: effectiveLang === "hi" ? generalReplyHi : generalReplyEn,
     hindiReply: generalReplyHi,
     englishReply: generalReplyEn,
     suggestions: [
@@ -132,7 +153,7 @@ ${clinicalContextSummary}
 Core Guidelines:
 1. Tone: Empathetic, supportive, respectful, destigmatizing, and scientifically clear.
 2. Format: Use clean markdown with headers, bullet points, and bold terms for readability.
-3. Language: If the user communicates in Hindi, respond in compassionate, clear Hindi. If in Hinglish, respond in accessible Hinglish. Otherwise, respond in English.
+3. Language: Preferred language is ${lang === "hi" ? "Hindi" : "English"}. If the user communicates in Hindi, respond in compassionate, clear Hindi. If in Hinglish, respond in accessible Hinglish. Otherwise, respond in English.
 4. Medical Safety: You are an educational assistant. State clearly that you provide health education and not individual medical diagnosis.
 5. Critical Triage: If the user describes soaking 2+ pads/hr, acute localized pelvic pain, faintness, or bleeding during pregnancy, immediately trigger an EMERGENCY WARNING, recommend an immediate hospital visit, and provide Indian emergency numbers (Ambulance: 112/102, Women Helpline: 1091).
 6. Follow-ups: End your response with 2-3 short, relevant follow-up questions formatted under a header "### Suggested Follow-ups:".`;

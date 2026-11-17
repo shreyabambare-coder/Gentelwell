@@ -66,7 +66,7 @@ export default function NutritionPage() {
       <SetuHeader />
       <main className="container" style={{ padding: "40px 0 80px" }}>
         <div style={{ textAlign: "center", marginBottom: "32px" }}>
-          <p className="eyebrow">LOCAL FOREST & FARM DIET (§3.7)</p>
+          <p className="eyebrow">LOCAL FOREST & FARM DIET</p>
           <h1>Affordable Rural Nutrition Guidance</h1>
           <p style={{ maxWidth: "660px", margin: "8px auto 0" }}>
             Life-stage guidance built <b>only</b> from affordable, locally available Jharkhand foods 
@@ -129,7 +129,7 @@ export default function NutritionPage() {
         {/* Malnutrition / Risk Signs Checklist (§3.7) */}
         <div className="card" style={{ maxWidth: "760px", margin: "0 auto" }}>
           <span className="stat-tag" style={{ background: "#fef3c7", color: "#92400e" }}>
-            Nutrition Risk Screening Tool (§3.7)
+            Nutrition Risk Screening Tool
           </span>
           <h3 style={{ fontSize: "18px", margin: "8px 0 4px" }}>
             Check for Malnutrition & Anemia Warning Signs

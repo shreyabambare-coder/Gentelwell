@@ -154,7 +154,7 @@ export default function MarketplacePage() {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "16px", marginBottom: "28px" }}>
           <div>
             <div className="voice-action-pill" style={{ marginBottom: "8px" }}>
-              <span>{isHi ? "चरण 3: प्रधानमंत्री जन औषधि केंद्र मंच" : "PHASE 3: HEALTHCARE MARKETPLACE & SCALE (§4)"}</span>
+              <span>{isHi ? "चरण 3: प्रधानमंत्री जन औषधि केंद्र मंच" : "PHASE 3: HEALTHCARE MARKETPLACE & SCALE"}</span>
             </div>
             <h1 style={{ margin: "4px 0 8px" }}>
               {isHi ? "सुलभ दवा एवं स्वास्थ्य उत्पाद भंडार" : "Affordable Healthcare Marketplace"}

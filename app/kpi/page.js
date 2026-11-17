@@ -20,7 +20,7 @@ export default function KpiPage() {
       <SetuHeader />
       <main className="container" style={{ padding: "40px 0 80px" }}>
         <div style={{ textAlign: "center", marginBottom: "32px" }}>
-          <p className="eyebrow">PILOT OBSERVABILITY & SAFETY DASHBOARD (§14)</p>
+          <p className="eyebrow">PILOT OBSERVABILITY & SAFETY DASHBOARD</p>
           <h1>Bishunpur Block Pilot KPIs</h1>
           <p style={{ maxWidth: "660px", margin: "8px auto 0" }}>
             Real-time tracking of registration coverage, AI triage safety metrics, offline sync health, 

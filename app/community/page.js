@@ -269,7 +269,7 @@ export default function CommunityPage() {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "16px", marginBottom: "28px" }}>
           <div>
             <div className="voice-action-pill" style={{ marginBottom: "8px" }}>
-              <span>{isHi ? "चरण 2: संचालित पायलट समूह" : "PHASE 2: MODERATED PILOT COHORT (§4, §11)"}</span>
+              <span>{isHi ? "चरण 2: संचालित पायलट समूह" : "PHASE 2: MODERATED PILOT COHORT"}</span>
             </div>
             <h1 style={{ margin: "4px 0 8px" }}>
               {isHi ? "सखी समुदाय सहायता मंच" : "Community Peer Support Forum"}
@@ -314,7 +314,7 @@ export default function CommunityPage() {
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px" }}>
               <h3 style={{ margin: 0, color: "var(--forest)" }}>
-                {isHi ? "🛡️ सुरक्षित समुदाय दिशानिर्देश (भारत DPDP अधिनियम 2023)" : "🛡️ Community Safety & Moderation Principles (§11)"}
+                {isHi ? "🛡️ सुरक्षित समुदाय दिशानिर्देश (भारत DPDP अधिनियम 2023)" : "🛡️ Community Safety & Moderation Principles (DPDP Compliance)"}
               </h3>
               <span className="stat-tag" style={{ background: "#dcfce7", color: "#166534" }}>
                 {isHi ? "सक्रिय प्री-मॉडरेशन" : "Active Pre-Moderation Engine"}

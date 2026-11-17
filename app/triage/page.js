@@ -17,6 +17,21 @@ export default function TriagePage() {
 
   const isHi = lang === "hi";
 
+  const handleRuleSelect = (ruleId) => {
+    const rule = TRIAGE_RULES.find((r) => r.id === ruleId);
+    if (!rule) return;
+
+    setSelectedRuleId(ruleId);
+    setTriageResult(rule);
+    setEscalated(false);
+
+    logAudit({
+      action: "TRIAGE_CHECK",
+      actor: "Patient / CHW Client",
+      detail: `Evaluated symptom triage: ${rule.condition} -> Output: ${rule.outputLevel}`
+    });
+  };
+
   // Check query params if ?mode=emergency was clicked from home
   useEffect(() => {
     try {
@@ -38,21 +53,6 @@ export default function TriagePage() {
 
     return () => window.removeEventListener("setu_lang_change", handleLang);
   }, []);
-
-  const handleRuleSelect = (ruleId) => {
-    const rule = TRIAGE_RULES.find((r) => r.id === ruleId);
-    if (!rule) return;
-
-    setSelectedRuleId(ruleId);
-    setTriageResult(rule);
-    setEscalated(false);
-
-    logAudit({
-      action: "TRIAGE_CHECK",
-      actor: "Patient / CHW Client",
-      detail: `Evaluated symptom triage: ${rule.condition} -> Output: ${rule.outputLevel}`
-    });
-  };
 
   const handleFreeTextSubmit = (e) => {
     e.preventDefault();
@@ -132,12 +132,12 @@ export default function TriagePage() {
       <SetuHeader />
       <main className="container" style={{ padding: "40px 0 80px" }}>
         <div style={{ textAlign: "center", marginBottom: "32px" }}>
-          <div className="voice-action-pill" onClick={() => speakAdvice("Setu AI Symptom Checker. Rule-based advisory triage. Never gives a diagnosis.")}>
+          <div className="voice-action-pill" onClick={() => speakAdvice("Sakhi AI Symptom Checker. Rule-based advisory triage. Never gives a diagnosis.")}>
             <span>🔊</span>
             <span>Listen in Voice (आवाज में सुनें)</span>
           </div>
-          <p className="eyebrow">RULE-BASED DECISION SUPPORT (§3.5, §9)</p>
-          <h1>AI Symptom Checker & Advisory Triage</h1>
+          <p className="eyebrow">SAKHI DECISION SUPPORT</p>
+          <h1>Sakhi AI Symptom Checker & Advisory Triage</h1>
           <p style={{ maxWidth: "660px", margin: "8px auto 0" }}>
             <b>Advisory Only — Never outputs a diagnosis.</b> Evaluates symptoms against hardcoded clinical 
             safety rules and directs you to self-care, a clinic visit, or immediate emergency care.
@@ -164,7 +164,7 @@ export default function TriagePage() {
             <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
               <span style={{ fontSize: "20px" }}>🔬</span>
               <b style={{ color: "#0369a1", fontSize: "15px" }}>
-                {isHi ? "नया: गांठ एवं लिपोमा क्लिनिकल आरएजी मूल्यांकन (मेयो क्लिनिक एवं एनआईएच)" : "NEW: Grounded Medical RAG Triage for Lumps & Lipomas"}
+                {isHi ? "नया: गांठ एवं सूजन जांच (मेयो क्लिनिक एवं एनआईएच गाइडलाइंस)" : "NEW: Specialized Lump & Swelling Checker (Mayo Clinic & NIH Guidelines)"}
               </b>
             </div>
             <p style={{ margin: 0, fontSize: "13px", color: "#0f172a", lineHeight: "1.5" }}>
@@ -176,7 +176,7 @@ export default function TriagePage() {
             className="button"
             style={{ background: "#0284c7", color: "#fff", whiteSpace: "nowrap", padding: "10px 18px" }}
           >
-            Open Lump RAG Triage →
+            {isHi ? "गांठ की जांच शुरू करें →" : "Check Lump or Swelling →"}
           </Link>
         </div>
 

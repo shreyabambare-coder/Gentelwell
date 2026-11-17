@@ -34,7 +34,7 @@ export default function ClinicianPortal() {
       <main className="container" style={{ padding: "40px 0 80px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px", marginBottom: "28px" }}>
           <div>
-            <p className="eyebrow">LIGHTWEIGHT CLINICAL INTERFACE (§2, §4)</p>
+            <p className="eyebrow">LIGHTWEIGHT CLINICAL INTERFACE</p>
             <h1>Clinician & ASHA Referral Portal</h1>
             <p style={{ margin: "4px 0 0" }}>
               Active Clinician: <b>Dr. Ananya Roy, MBBS, MS (Obs/Gyn)</b> · Bishunpur CHC

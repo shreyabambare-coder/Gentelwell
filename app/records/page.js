@@ -62,7 +62,7 @@ export default function RecordsPage() {
       <SetuHeader />
       <main className="container" style={{ padding: "40px 0 80px" }}>
         <div style={{ textAlign: "center", marginBottom: "32px" }}>
-          <p className="eyebrow">LONGITUDINAL FHIR R4-COMPATIBLE RECORDS (§3.8)</p>
+          <p className="eyebrow">LONGITUDINAL FHIR R4-COMPATIBLE RECORDS</p>
           <h1>Comprehensive Patient Health Timeline</h1>
           <p style={{ maxWidth: "660px", margin: "8px auto 0" }}>
             Persists across CHW visits, clinics, and district hospitals. Fully offline creation 
@@ -300,7 +300,7 @@ export default function RecordsPage() {
               onClick={(e) => e.stopPropagation()}
             >
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
-                <h3 style={{ margin: 0, fontSize: "18px" }}>🔒 Immutable Provenance Audit Trail (§10)</h3>
+                <h3 style={{ margin: 0, fontSize: "18px" }}>🔒 Immutable Provenance Audit Trail</h3>
                 <button
                   type="button"
                   style={{ background: "none", border: 0, fontSize: "18px", cursor: "pointer" }}

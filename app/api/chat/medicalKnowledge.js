@@ -41,7 +41,10 @@ export const CLINICAL_TOPICS = [
     id: "menstrual_cycle_basics",
     triggers: [
       "normal period", "cycle length", "menstrual cycle", "how many days", "period delay",
-      "irregular periods", "period late", "chatar", "mahavari kitne din", "period cycle", "period calendar"
+      "irregular periods", "period late", "chatar", "mahavari kitne din", "period cycle", "period calendar",
+      "period delayed", "missed period", "late period", "period schedule", "how long is cycle", "short cycle", "long cycle",
+      "period nahi aaya", "date nikal gayi", "mahavari late", "period aage peeche",
+      "माहवारी", "पीरियड्स", "माहवारी चक्र", "पीरियड लेट", "डेट नहीं आई", "अनियमित माहवारी", "पीरियड देर से", "माहवारी कितने दिन"
     ],
     title: "Normal Menstrual Cycle & Irregularity Guide",
     category: "Menstrual Health",
@@ -94,7 +97,10 @@ According to **FIGO (International Federation of Gynecology & Obstetrics)** stan
     id: "menstrual_cramps",
     triggers: [
       "cramp", "cramps", "period pain", "dysmenorrhea", "stomach pain", "pet dard", "period me dard",
-      "severe pain period", "pelvic cramp", "painkillers period", "meftal", "hot water bag"
+      "severe pain period", "pelvic cramp", "painkillers period", "meftal", "hot water bag",
+      "period cramp", "menstrual pain", "cramping", "painful period", "painful menses", "lower back pain period", "stomach ache period",
+      "period me pet dard", "kamar dard period", "mahavari me dard",
+      "पीरियड्स में दर्द", "माहवारी में दर्द", "मासिक धर्म दर्द", "पीरियड दर्द", "पेट में दर्द पीरियड", "दर्द कम करने के उपाय", "सिकाई", "क्रैम्प्स"
     ],
     title: "Relief for Menstrual Pain (Dysmenorrhea)",
     category: "Menstrual Health",
@@ -140,7 +146,10 @@ If pain begins days before bleeding, radiates severely down the legs or rectum, 
     id: "pcos_pcod",
     triggers: [
       "pcos", "pcod", "polycystic", "facial hair", "hirsutism", "hormonal imbalance", "acne jawline",
-      "weight gain period", "insulin resistance", "ovary cyst", "infertility pcos", "metformin pcos"
+      "weight gain period", "insulin resistance", "ovary cyst", "infertility pcos", "metformin pcos",
+      "polycystic ovary", "chin hair", "irregular cycles pcos", "pcod symptoms", "pcos diet", "inositol",
+      "chehre par baal", "vajan badhna period", "hormone imbalance",
+      "पीसीओएस", "पीसीओडी", "हार्मोनल असंतुलन", "चेहरे पर बाल", "अंडे नहीं बन रहे", "अनियमित पीरियड पीसीओएस", "वजन बढ़ना"
     ],
     title: "Comprehensive Clinical Guide to PCOS / PCOD",
     category: "Hormonal & Metabolic Health",
@@ -197,7 +206,10 @@ High circulating insulin stimulates the ovarian theca cells to overproduce andro
     id: "iron_anemia_deficiency",
     triggers: [
       "iron", "anemia", "anaemia", "hemoglobin", "low hb", "tiredness", "weakness", "dizziness",
-      "khoon ki kami", "thakan", "ferritin", "pale skin", "shortness of breath", "iron rich food", "palak"
+      "khoon ki kami", "thakan", "ferritin", "pale skin", "shortness of breath", "iron rich food", "palak",
+      "low blood", "blood deficiency", "increase hemoglobin", "tiredness fatigue", "dizziness weakness", "feeling weak",
+      "hb kam hai", "iron ki goli", "kamzori",
+      "खून की कमी", "हीमोग्लोबिन", "एनीमिया", "कमजोरी", "थकान", "खून कैसे बढ़ाएं", "आयरन की गोली", "पालक गुड़"
     ],
     title: "Iron Deficiency Anemia & Hemoglobin Optimization",
     category: "Nutrition & Vitality",
@@ -255,7 +267,10 @@ According to **WHO & ICMR** criteria:
     id: "menstrual_hygiene_products",
     triggers: [
       "hygiene", "sanitary pad", "tampon", "menstrual cup", "cup size", "how to insert cup",
-      "pad rash", "infection", "clean intimate", "soap intimate", "tss", "toxic shock", "smell vagina"
+      "pad rash", "infection", "clean intimate", "soap intimate", "tss", "toxic shock", "smell vagina",
+      "pads", "period cup", "how often change pad", "intimate hygiene", "cleaning during period",
+      "pad kaise use kare", "kapda use karna", "pad se chhile",
+      "सैनिटरी पैड", "पैड", "मेंस्ट्रुअल कप", "माहवारी स्वच्छता", "पैड से रैशेज", "कपड़ा इस्तेमाल करना"
     ],
     title: "Menstrual Hygiene Management (MHM) & Product Safety",
     category: "Hygiene & Wellness",
@@ -301,7 +316,10 @@ According to **WHO & ICMR** criteria:
     triggers: [
       "pregnant", "pregnancy", "trimester", "morning sickness", "nausea pregnant", "baby kick",
       "folic acid", "foods avoid pregnancy", "garbhavastha", "first trimester", "third trimester",
-      "ultrasound pregnancy", "preeclampsia", "swelling feet pregnant"
+      "ultrasound pregnancy", "preeclampsia", "swelling feet pregnant",
+      "what to eat pregnancy", "pregnant food", "throwing up pregnancy", "baby growth food", "nausea in morning", "pregnancy nausea",
+      "garbhvati", "pregnancy me kya khaye", "ulti aana pregnancy", "bacche ke liye diet",
+      "गर्भावस्था", "गर्भवती", "गर्भावस्था में खान पान", "उल्टी गर्भावस्था", "मॉर्निंग सिकनेस", "फॉलिक एसिड", "कैल्शियम की गोली", "बच्चे का विकास"
     ],
     title: "Clinical Trimester Milestones, Nutrition & Warning Signs",
     category: "Maternal Health",
@@ -366,7 +384,10 @@ According to **WHO & ICMR** criteria:
     triggers: [
       "uti", "urinary infection", "burning urination", "peshab me jalan", "white discharge",
       "curdy discharge", "itching private parts", "vaginal itching", "yeast infection",
-      "bacterial vaginosis", "foul smell", "yellow discharge", "green discharge"
+      "bacterial vaginosis", "foul smell", "yellow discharge", "green discharge",
+      "burning pee", "burning peeing", "pain peeing", "pain urination", "frequent urination", "vaginal discharge", "itching down there", "smelly discharge", "discharge itching",
+      "peshab me dard", "safed paani", "khujli vagina", "badboo aana", "safed pani",
+      "पेशाब में जलन", "पेशाब में दर्द", "सफेद पानी", "सफेद पानी की समस्या", "योनि में खुजली", "बदबूदार डिस्चार्ज", "यूटीआई", "इन्फेक्शन"
     ],
     title: "UTI, Candidiasis & Vaginal Discharge Clinical Triage",
     category: "Infection & Intimate Health",
@@ -422,7 +443,10 @@ If you have **fever (>101°F), chills, nausea, or flank/back pain**, the infecti
     triggers: [
       "ovulation", "fertile window", "pregnant chance", "how to get pregnant", "safe period",
       "contraception", "birth control", "ipill", "emergency contraceptive", "unprotected sex",
-      "morning after pill", "pregnancy test kit", "prega news", "missed period test"
+      "morning after pill", "pregnancy test kit", "prega news", "missed period test",
+      "ovulating", "best time get pregnant", "conceive baby", "birth control pills", "family planning",
+      "baccha conceive", "garbh thaharne", "copper t lagwana", "pregnancy rokne",
+      "ओव्यूलेशन", "गर्भधारण", "बच्चा पैदा करने का समय", "गर्भनिरोधक", "कॉपर टी", "माला डी", "इमरजेंसी पिल", "फैमिली प्लानिंग"
     ],
     title: "Ovulation, Fertile Window & Contraceptive Science",
     category: "Reproductive & Family Health",
@@ -478,7 +502,10 @@ If you have **fever (>101°F), chills, nausea, or flank/back pain**, the infecti
     triggers: [
       "mental health", "stress", "anxiety", "depression", "crying spell", "pmdd", "pms mood",
       "irritated period", "postpartum blues", "postpartum depression", "cant sleep", "panic attack",
-      "mood swing", "sad without reason", "tanaav", "gussa"
+      "mood swing", "sad without reason", "tanaav", "gussa",
+      "crying after delivery", "sadness after birth", "postpartum sadness", "anxiety after baby", "feeling depressed", "mood swings",
+      "mood kharab period", "delivery ke baad rona", "chidhchidhapan", "rona aana",
+      "तनाव", "अवसाद", "डिलीवरी के बाद डिप्रेशन", "चिड़चिड़ापन", "मूड स्विंग", "घबराहट", "रोना आना"
     ],
     title: "Neuro-Endocrine Mood Shifts, PMDD & Maternal Wellbeing",
     category: "Emotional & Mental Wellbeing",
@@ -525,7 +552,10 @@ Neurotransmitters such as **Serotonin** and **GABA** are intimately linked to cy
     id: "menopause_perimenopause",
     triggers: [
       "menopause", "perimenopause", "hot flashes", "night sweats", "estrogen", "bone density",
-      "osteoporosis", "dryness menopause", "periods stopping", "age 45", "age 50"
+      "osteoporosis", "dryness menopause", "periods stopping", "age 45", "age 50",
+      "menopause symptoms", "hot flushes", "irregular periods 40s", "stopping periods", "climacteric",
+      "period band hona", "mahavari band", "paseena aana rat me",
+      "मेनोपॉज", "रजोनिवृत्ति", "माहवारी बंद होना", "रात में पसीना", "गर्मी लगना", "उम्र 45 माहवारी"
     ],
     title: "Perimenopause, Hot Flashes & Bone Health Transition",
     category: "Menopausal Health",
@@ -575,7 +605,10 @@ Neurotransmitters such as **Serotonin** and **GABA** are intimately linked to cy
       "heavy bleeding", "soaking pad", "soaked pad", "golf ball clot", "severe pelvic pain",
       "fainting", "fainted", "unbearable abdominal pain", "bleeding while pregnant",
       "bleeding pregnant", "ectopic", "high fever pelvic", "shortness of breath bleeding",
-      "khoon beh raha", "bahut jyada bleeding", "behosh", "ek taraf tez dard"
+      "khoon beh raha", "bahut jyada bleeding", "behosh", "ek taraf tez dard",
+      "soaking 2 pads", "bleeding heavily", "passing clots", "fainting spell", "loss of consciousness", "severe belly pain pregnant",
+      "bahut zyada khoon", "chakkar aake girna", "pregnant me khoon",
+      "खून बह रहा", "बहुत ज्यादा खून", "ब्लीडिंग", "बेहोश", "चक्कर आकर गिरना", "गर्भावस्था में खून", "गर्भपात", "पेट में तेज दर्द", "अत्यधिक रक्तस्राव"
     ],
     title: "Urgent Medical Red Flags & Triage Protocol",
     category: "Emergency Care",

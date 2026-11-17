@@ -79,7 +79,7 @@ export default function AuthPage() {
       <SetuHeader />
       <main className="container" style={{ padding: "40px 0 80px" }}>
         <div style={{ textAlign: "center", marginBottom: "32px" }}>
-          <p className="eyebrow">HOUSEHOLD IDENTITY & CONSENT (§3.1, §10)</p>
+          <p className="eyebrow">HOUSEHOLD IDENTITY & CONSENT</p>
           <h1>Access Your Family Health Account</h1>
           <p style={{ maxWidth: "600px", margin: "8px auto 0" }}>
             Designed for rural households with shared devices. Sign in via Phone OTP or 
@@ -260,7 +260,7 @@ export default function AuthPage() {
           <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
             {/* Household Members */}
             <div className="card">
-              <span className="stat-tag">Household Profiles (§3.1)</span>
+              <span className="stat-tag">Household Profiles</span>
               <h3 style={{ fontSize: "18px", marginBottom: "6px" }}>
                 {household?.headName}&apos;s Family
               </h3>

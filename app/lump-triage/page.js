@@ -39,7 +39,7 @@ export default function LumpTriagePage() {
   const [chatMessages, setChatMessages] = useState([
     {
       sender: "assistant",
-      text: "Hello, I am the Clinical Information and RAG Triage Assistant for soft tissue lumps and lipomas. How can I help you understand your symptoms today?",
+      text: "Hello, I am your Health Assistant for soft tissue lumps, swellings, and lipomas. How can I help you understand your symptoms today?",
       citation: "Mayo Clinic & NIH StatPearls (Lipoma Clinical Protocols)",
       isDisclaimer: true
     }
@@ -178,9 +178,9 @@ export default function LumpTriagePage() {
         {/* Page Top Title */}
         <div style={{ textAlign: "center", marginBottom: "32px" }}>
           <div className="voice-action-pill" style={{ margin: "0 auto 10px" }}>
-            <span>{isHi ? "चिकित्सीय आरएजी ज्ञान आधार" : "GROUNDED MEDICAL RAG & CLINICAL TRIAGE ENGINE"}</span>
+            <span>{isHi ? "चिकित्सीय ज्ञान आधार (मेयो क्लिनिक एवं एनआईएच)" : "GROUNDED MEDICAL KNOWLEDGE BASE (MAYO CLINIC & NIH)"}</span>
           </div>
-          <h1>{isHi ? "गांठ एवं लिपोमा क्लिनिकल ट्राइएज" : "Soft Tissue Lump & Lipoma Clinical Triage"}</h1>
+          <h1>{isHi ? "गांठ एवं सूजन की जांच" : "Lump & Swelling Health Checker"}</h1>
           <p style={{ maxWidth: "700px", margin: "8px auto 0", color: "var(--slate)" }}>
             {isHi
               ? "मेयो क्लिनिक, एनआईएच एवं क्लीवलैंड क्लिनिक के शोध पर आधारित सुरक्षित मूल्यांकन। यह उपकरण किसी स्थिति का अंतिम निदान नहीं करता, बल्कि आपको सही चिकित्सीय परामर्श की ओर निर्देशित करता है।"
@@ -208,7 +208,7 @@ export default function LumpTriagePage() {
               <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
                 <span style={{ fontSize: "20px" }}>⚖️</span>
                 <b style={{ color: "#92400e", fontSize: "15px" }}>
-                  {isHi ? "अनिवार्य चिकित्सा अस्वीकरण एवं सहमति (DPDP / HIPAA अनुपालन)" : "Mandatory Medical Disclaimer & Informed Consent (§4)"}
+                  {isHi ? "अनिवार्य चिकित्सा अस्वीकरण एवं सहमति (DPDP अनुपालन)" : "Mandatory Medical Disclaimer & Informed Consent"}
                 </b>
               </div>
               <p style={{ margin: 0, fontSize: "13px", color: "#78350f", lineHeight: "1.5" }}>
@@ -282,7 +282,7 @@ export default function LumpTriagePage() {
               fontSize: "14px"
             }}
           >
-            💬 {isHi ? "आरएजी मेडिकल चैटबॉट" : "2. RAG Medical Knowledge Chat"}
+            💬 {isHi ? "चिकित्सीय ज्ञान चैट" : "2. Medical Knowledge Chat"}
           </button>
         </div>
 

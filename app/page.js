@@ -61,8 +61,8 @@ export default function SetuHomePage() {
               </h1>
               <p style={{ fontSize: "16px", marginTop: "12px" }}>
                 {isHi
-                  ? "सेतु महाराष्ट्र के ग्रामीण एवं अर्ध-शहरी परिवारों के लिए प्राथमिक जांच, डॉक्टर परामर्श, मातृत्व निगरानी और स्वास्थ्य रिकॉर्ड को जोड़ता है। बेसिक फोन पर 100% ऑफ़लाइन काम करता है, साथ ही एसएमएस और आईवीआर वॉयस कॉल बैकअप भी उपलब्ध है।"
-                  : "Setu bridges clinical triage, doctor visits, maternal tracking, and health records for families across Maharashtra. Works 100% offline on basic phones, with fallback to SMS and IVR voice calls."}
+                  ? "सांकेतिका महाराष्ट्र के ग्रामीण एवं अर्ध-शहरी परिवारों के लिए प्राथमिक जांच, डॉक्टर परामर्श, मातृत्व निगरानी और स्वास्थ्य रिकॉर्ड को जोड़ता है। बेसिक फोन पर 100% ऑफ़लाइन काम करता है, साथ ही एसएमएस और आईवीआर वॉयस कॉल बैकअप भी उपलब्ध है।"
+                  : "Sanketika bridges clinical triage, doctor visits, maternal tracking, and health records for families across Maharashtra. Works 100% offline on basic phones, with fallback to SMS and IVR voice calls."}
               </p>
 
               <div className="button-row" style={{ marginTop: "24px" }}>
@@ -203,7 +203,7 @@ export default function SetuHomePage() {
                   <circle cx="12" cy="12" r="4"/>
                 </svg>
               </span>
-              <span className="action-label">{isHi ? "गांठ / लिपोमा RAG" : "Lump & Lipoma RAG"}</span>
+              <span className="action-label">{isHi ? "गांठ की जांच" : "Lump & Swelling Check"}</span>
             </Link>
 
             <Link href="/booking" className="icon-action-card">
@@ -316,8 +316,8 @@ export default function SetuHomePage() {
                 <h3 style={{ marginBottom: "6px" }}>{isHi ? "कोई मरीज न छूटे — हर फोन पर काम करता है" : "No Patient Left Behind — Works on Any Phone"}</h3>
                 <p style={{ margin: 0, fontSize: "13.5px" }}>
                   {isHi
-                    ? "जब 3G/4G सिग्नल न हो, तो सेतु स्वचालित रूप से एसएमएस और इंटरैक्टिव वॉयस कॉल (IVR) पर चलता है।"
-                    : "When 3G/4G fails, Setu automatically continues via SMS and interactive voice call (IVR)."}
+                    ? "जब 3G/4G सिग्नल न हो, तो सांकेतिका स्वचालित रूप से एसएमएस और इंटरैक्टिव वॉयस कॉल (IVR) पर चलता है।"
+                    : "When 3G/4G fails, Sanketika automatically continues via SMS and interactive voice call (IVR)."}
                 </p>
               </div>
 

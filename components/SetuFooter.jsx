@@ -26,22 +26,36 @@ export default function SetuFooter() {
       <div className="container footer-grid">
         <div>
           <Link href="/" className="logo" style={{ color: "#ffffff", marginBottom: "12px" }}>
-            <span className="logo-icon" style={{ background: "#8d68bb", display: "grid", placeItems: "center" }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2v20M2 12h20"/>
-              </svg>
+            <span
+              className="logo-icon"
+              style={{
+                background: "#ffffff",
+                display: "grid",
+                placeItems: "center",
+                width: "42px",
+                height: "42px",
+                borderRadius: "10px",
+                padding: "3px",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.18)"
+              }}
+            >
+              <img
+                src="/logo-square.png"
+                alt="Sanketika Logo"
+                style={{ width: "34px", height: "34px", objectFit: "contain", display: "block" }}
+              />
             </span>
             <div>
-              <b>{isHi ? "सेतु स्वास्थ्य" : "Setu Health"}</b>
+              <b>{isHi ? "सांकेतिका" : "Sanketika"}</b>
               <small style={{ color: "#d3ccdc" }}>
-                {isHi ? "ग्रामीण स्वास्थ्य एवं मातृत्व देखभाल मंच" : "Offline-First Rural Healthcare Platform"}
+                {isHi ? "महिला स्वास्थ्य एवं मातृत्व देखभाल मंच" : "Women's Health & Maternal Platform"}
               </small>
             </div>
           </Link>
           <p>
             {isHi
-              ? "महाराष्ट्र के ग्रामीण एवं अर्ध-शहरी क्षेत्रों में अंतिम छोर तक नैदानिक व मातृत्व देखभाल पहुंचाना। कमजोर 2G नेटवर्क और एसएमएस/आईवीआर बैकअप के लिए विशेष रूप से निर्मित।"
-              : "Bridging healthcare and maternal clinical care across Maharashtra districts (Mumbai, Pune, Palghar). Designed for low-bandwidth connections, low-literacy users, and fallback to SMS & IVR."}
+              ? "महाराष्ट्र के ग्रामीण एवं अर्ध-शहरी क्षेत्रों में महिलाओं तक नैदानिक व मातृत्व देखभाल पहुंचाना। कमजोर 2G नेटवर्क और एसएमएस/आईवीआर बैकअप के लिए विशेष रूप से निर्मित।"
+              : "Bridging women's healthcare and maternal clinical care across Maharashtra districts (Mumbai, Pune, Palghar). Designed for low-bandwidth connections, low-literacy users, and fallback to SMS & IVR."}
           </p>
           <p style={{ fontSize: "12px", color: "#8faea2", marginTop: "10px" }}>
             <b>{isHi ? "आपातकालीन सेवाएं:" : "Emergency Services:"}</b> {isHi ? "कॉल करें" : "Call"} <b>112</b> {isHi ? "या" : "or"} <b>108</b> ({isHi ? "सरकारी एम्बुलेंस" : "Govt Ambulance"}) · <b>1091</b> ({isHi ? "महिला हेल्पलाइन" : "Women Helpline"})
@@ -87,8 +101,8 @@ export default function SetuFooter() {
         <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "10px" }}>
           <span>
             {isHi
-              ? "सेतु स्वास्थ्य भारत के डिजिटल व्यक्तिगत डेटा संरक्षण अधिनियम (DPDP) 2023 के अनुरूप एक सलाहकार मंच है। AI परिणाम केवल निर्णय सहायता के लिए हैं।"
-              : "Setu Health is an advisory platform compliant with India's Digital Personal Data Protection (DPDP) Act 2023. AI symptom checker outputs are non-diagnostic decision support."}
+              ? "सांकेतिका भारत के डिजिटल व्यक्तिगत डेटा संरक्षण अधिनियम (DPDP) 2023 के अनुरूप एक सलाहकार मंच है। AI परिणाम केवल निर्णय सहायता के लिए हैं।"
+              : "Sanketika is an advisory platform compliant with India's Digital Personal Data Protection (DPDP) Act 2023. AI symptom checker outputs are non-diagnostic decision support."}
           </span>
           <span>{isHi ? "महाराष्ट्र स्वास्थ्य नेटवर्क (मुंबई, पुणे, पालघर, कोल्हापुर)" : "Maharashtra Healthcare Network (Mumbai, Pune, Palghar, Kolhapur)"}</span>
         </div>

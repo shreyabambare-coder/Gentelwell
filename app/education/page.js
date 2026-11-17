@@ -32,7 +32,7 @@ export default function EducationPage() {
       <SetuHeader />
       <main className="container" style={{ padding: "40px 0 80px" }}>
         <div style={{ textAlign: "center", marginBottom: "32px" }}>
-          <p className="eyebrow">OFFLINE AUDIO-VIDEO LIBRARY (§3.2)</p>
+          <p className="eyebrow">OFFLINE AUDIO-VIDEO LIBRARY</p>
           <h1>Health Education with Voice Narration</h1>
           <p style={{ maxWidth: "660px", margin: "8px auto 0" }}>
             Mandatory voice narration in Hindi and English. Downloadable videos play 100% offline 

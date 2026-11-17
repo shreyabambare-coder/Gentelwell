@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   getNetworkMode,
   setNetworkMode,
@@ -11,38 +11,50 @@ import {
 
 export default function SetuHeader() {
   const [open, setOpen] = useState(false);
-  const [networkMode, setMode] = useState("online");
-  const [pendingCount, setPendingCount] = useState(0);
+  const [moreOpen, setMoreOpen] = useState(false);
+  const [networkMode, setMode] = useState(() => getNetworkMode());
+  const [pendingCount, setPendingCount] = useState(() => {
+    return getMutationQueue().filter((m) => m.syncStatus === "pending").length;
+  });
   const [isSyncing, setIsSyncing] = useState(false);
-  const [lang, setLang] = useState("en");
+  const [lang, setLang] = useState(() => {
+    if (typeof window !== "undefined") {
+      try {
+        return localStorage.getItem("setu_lang") || "en";
+      } catch {}
+    }
+    return "en";
+  });
+
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
-    setMode(getNetworkMode());
-    setPendingCount(getMutationQueue().filter((m) => m.syncStatus === "pending").length);
-
     const handleNetworkChange = (e) => setMode(e.detail.mode);
-    const handleSyncUpdate = (e) => {
+    const handleSyncUpdate = () => {
       setPendingCount(getMutationQueue().filter((m) => m.syncStatus === "pending").length);
     };
 
     window.addEventListener("setu_network_change", handleNetworkChange);
     window.addEventListener("setu_sync_update", handleSyncUpdate);
 
-    // Sync language from localStorage and global event
-    try {
-      const saved = localStorage.getItem("setu_lang");
-      if (saved) setLang(saved);
-    } catch {}
-
     const handleGlobalLang = (e) => {
       if (e.detail?.lang) setLang(e.detail.lang);
     };
     window.addEventListener("setu_lang_change", handleGlobalLang);
 
+    // Close 'More' dropdown when clicking outside
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setMoreOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
     return () => {
       window.removeEventListener("setu_network_change", handleNetworkChange);
       window.removeEventListener("setu_sync_update", handleSyncUpdate);
       window.removeEventListener("setu_lang_change", handleGlobalLang);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -73,8 +85,8 @@ export default function SetuHeader() {
     window.speechSynthesis.cancel();
     const text =
       lang === "hi"
-        ? "सेतु स्वास्थ्य में आपका स्वागत है। यहां आप डॉक्टर से मिलने का समय ले सकते हैं, लक्षण जांच सकते हैं, और नजदीकी अस्पताल ढूंढ सकते हैं।"
-        : "Welcome to Setu Health. Tap any large button below to check symptoms, book clinic visits, or view your medical records.";
+        ? "सांकेतिका में आपका स्वागत है। यहां आप डॉक्टर से मिलने का समय ले सकते हैं, लक्षण जांच सकते हैं, और नजदीकी अस्पताल ढूंढ सकते हैं।"
+        : "Welcome to Sanketika. Tap any large button below to check symptoms, book clinic visits, or view your medical records.";
     const u = new SpeechSynthesisUtterance(text);
     u.lang = lang === "hi" ? "hi-IN" : "en-US";
     window.speechSynthesis.speak(u);
@@ -152,6 +164,27 @@ export default function SetuHeader() {
               {isHi ? "SMS / कॉल सेवा" : "USSD / SMS / IVR"}
             </Link>
 
+            {/* Mobile Simulator View Button */}
+            <Link
+              href="/mobile"
+              style={{
+                background: "rgba(255,255,255,0.18)",
+                border: "1px solid rgba(255,255,255,0.3)",
+                color: "#fff",
+                padding: "2px 8px",
+                borderRadius: "12px",
+                fontSize: "11px",
+                fontWeight: "600",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "4px"
+              }}
+              title={isHi ? "मोबाइल व्यू सिम्युलेटर खोलें" : "Open Interactive Mobile Simulator"}
+            >
+              <span>📱</span>
+              <span>{isHi ? "मोबाइल व्यू" : "Mobile View"}</span>
+            </Link>
+
             {/* Language Switcher */}
             <button
               type="button"
@@ -176,93 +209,162 @@ export default function SetuHeader() {
       {/* Main Navigation Bar */}
       <header className="site-header">
         <nav className="container nav">
-          <Link href="/" className="logo">
-            <span className="logo-icon" style={{ background: "#8d68bb", color: "#fff", display: "grid", placeItems: "center" }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2v20M2 12h20"/>
-              </svg>
-            </span>
+          <Link href="/" className="logo" aria-label="Sanketika Home">
+            <img
+              src="/logo.png"
+              alt="Sanketika Logo"
+              className="site-logo-img"
+            />
             <div>
-              <b>{isHi ? "सेतु स्वास्थ्य" : "Setu Health"}</b>
-              <small>{isHi ? "महाराष्ट्र स्वास्थ्य सेवा मंच" : "Maharashtra Healthcare Platform"}</small>
+              <b>{isHi ? "सांकेतिका" : "Sanketika"}</b>
+              <small>{isHi ? "महिला स्वास्थ्य एवं मातृत्व सेवा मंच" : "Women's Health & Maternal Platform"}</small>
             </div>
           </Link>
 
-          {/* Voice Prompt Button for Low-Literacy Users (§1, §2) */}
-          <button
-            type="button"
-            onClick={speakScreenIntro}
-            style={{
-              background: "var(--sage)",
-              border: "1.5px solid var(--line)",
-              color: "var(--forest)",
-              padding: "6px 12px",
-              borderRadius: "20px",
-              fontSize: "12px",
-              fontWeight: "600",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              gap: "6px"
-            }}
-            title={isHi ? "आवाज में निर्देश सुनें" : "Listen to page instructions in voice"}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-            </svg>
-            <span className="hide-on-mobile">{isHi ? "आवाज सहायक" : "Voice Guide"}</span>
-          </button>
-
-          <button
-            className="menu-button"
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle navigation"
-            aria-expanded={open}
-          >
-            ☰
-          </button>
-
+          {/* Center: Streamlined Primary Navigation (Zero Wrapping) */}
           <div className={`nav-links ${open ? "show" : ""}`}>
+            <span className="mobile-nav-section-title">{isHi ? "मुख्य सेवाएं" : "Primary Services"}</span>
+
             <Link href="/" onClick={() => setOpen(false)}>
               {isHi ? "होम" : "Home"}
             </Link>
             <Link href="/triage" onClick={() => setOpen(false)}>
-              {isHi ? "लक्षण जांच" : "Triage AI"}
+              {isHi ? "सखी AI" : "Sakhi AI"}
             </Link>
             <Link href="/lump-triage" onClick={() => setOpen(false)}>
-              {isHi ? "गांठ / लिपोमा RAG" : "Lump RAG"}
+              {isHi ? "गांठ जांच" : "Lump Check"}
             </Link>
             <Link href="/booking" onClick={() => setOpen(false)}>
               {isHi ? "अपॉइंटमेंट" : "Book Visit"}
             </Link>
-            <Link href="/facilities" onClick={() => setOpen(false)}>
-              {isHi ? "क्लीनिक व अस्पताल" : "Clinics & Haat"}
-            </Link>
             <Link href="/records" onClick={() => setOpen(false)}>
               {isHi ? "स्वास्थ्य रिकॉर्ड" : "My Records"}
             </Link>
-            <Link href="/education" onClick={() => setOpen(false)}>
-              {isHi ? "शिक्षा" : "Learn"}
-            </Link>
-            <Link href="/chatbot" onClick={() => setOpen(false)}>
-              {isHi ? "महिला स्वास्थ्य" : "Women's Care"}
-            </Link>
-            <Link href="/community" onClick={() => setOpen(false)}>
-              {isHi ? "समुदाय मंच" : "Community"}
-            </Link>
-            <Link href="/marketplace" onClick={() => setOpen(false)}>
-              {isHi ? "जन औषधि केंद्र" : "Jan Aushadhi"}
-            </Link>
-            <Link href="/clinician" onClick={() => setOpen(false)}>
-              {isHi ? "डॉक्टर पोर्टल" : "Clinician"}
-            </Link>
-            <Link href="/kpi" onClick={() => setOpen(false)}>
-              {isHi ? "डैशबोर्ड" : "KPIs"}
-            </Link>
-            <Link href="/auth" className="nav-btn" onClick={() => setOpen(false)}>
+
+            {/* Desktop 'More ▾' Dropdown / Mobile Grouped Sections */}
+            <div className={`nav-dropdown ${moreOpen ? "is-open" : ""}`} ref={dropdownRef}>
+              <button
+                type="button"
+                className="nav-dropdown-btn"
+                onClick={() => setMoreOpen(!moreOpen)}
+                aria-expanded={moreOpen}
+              >
+                <span>{isHi ? "अधिक सेवाएं" : "More"}</span>
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={{ transform: moreOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s ease" }}
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              {(moreOpen || open) && (
+                <div className="nav-dropdown-menu">
+                  <span className="nav-dropdown-header mobile-nav-section-title">
+                    {isHi ? "देखभाल व समुदाय" : "Care & Resources"}
+                  </span>
+                  <Link href="/facilities" className="nav-dropdown-item" onClick={() => { setOpen(false); setMoreOpen(false); }}>
+                    <span>🏥</span>
+                    <span>{isHi ? "क्लीनिक व हाट" : "Clinics & Haat"}</span>
+                  </Link>
+                  <Link href="/chatbot" className="nav-dropdown-item" onClick={() => { setOpen(false); setMoreOpen(false); }}>
+                    <span>💬</span>
+                    <span>{isHi ? "महिला स्वास्थ्य चैट" : "Women's Care"}</span>
+                  </Link>
+                  <Link href="/education" className="nav-dropdown-item" onClick={() => { setOpen(false); setMoreOpen(false); }}>
+                    <span>📚</span>
+                    <span>{isHi ? "स्वास्थ्य शिक्षा" : "Learn"}</span>
+                  </Link>
+                  <Link href="/community" className="nav-dropdown-item" onClick={() => { setOpen(false); setMoreOpen(false); }}>
+                    <span>👥</span>
+                    <span>{isHi ? "समुदाय मंच" : "Community"}</span>
+                  </Link>
+                  <Link href="/marketplace" className="nav-dropdown-item" onClick={() => { setOpen(false); setMoreOpen(false); }}>
+                    <span>💊</span>
+                    <span>{isHi ? "जन औषधि केंद्र" : "Jan Aushadhi Store"}</span>
+                  </Link>
+
+                  <div className="nav-dropdown-divider" />
+
+                  <span className="nav-dropdown-header mobile-nav-section-title">
+                    {isHi ? "स्टाफ व डैशबोर्ड" : "Staff & Dashboards"}
+                  </span>
+                  <Link href="/clinician" className="nav-dropdown-item" onClick={() => { setOpen(false); setMoreOpen(false); }}>
+                    <span>🩺</span>
+                    <span>{isHi ? "डॉक्टर पोर्टल" : "Clinician Portal"}</span>
+                  </Link>
+                  <Link href="/kpi" className="nav-dropdown-item" onClick={() => { setOpen(false); setMoreOpen(false); }}>
+                    <span>📊</span>
+                    <span>{isHi ? "पायलट KPIs" : "Bishunpur KPIs"}</span>
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* Mobile-only Household CTA */}
+            <div className="mobile-only-household" style={{ display: "none" }}>
+              <span className="mobile-nav-section-title">{isHi ? "खाता" : "Account"}</span>
+              <Link
+                href="/auth"
+                className="nav-btn"
+                onClick={() => setOpen(false)}
+                style={{ width: "100%", justifyContent: "center", marginTop: "8px" }}
+              >
+                {isHi ? "परिवार खाता लॉगिन" : "Household Login"}
+              </Link>
+            </div>
+          </div>
+
+          {/* Right: Actions Group (Voice Guide + Household Button + Mobile Hamburger) */}
+          <div className="nav-right-group">
+            {/* Voice Prompt Button */}
+            <button
+              type="button"
+              onClick={speakScreenIntro}
+              style={{
+                background: "var(--sage)",
+                border: "1.5px solid var(--line)",
+                color: "var(--forest)",
+                padding: "6px 12px",
+                borderRadius: "20px",
+                fontSize: "12px",
+                fontWeight: "600",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+                whiteSpace: "nowrap"
+              }}
+              title={isHi ? "आवाज में निर्देश सुनें" : "Listen to page instructions in voice"}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              </svg>
+              <span className="hide-on-mobile">{isHi ? "आवाज सहायक" : "Voice Guide"}</span>
+            </button>
+
+            {/* Desktop Household CTA Button */}
+            <Link href="/auth" className="nav-btn hide-on-mobile">
               {isHi ? "परिवार खाता" : "Household"}
             </Link>
+
+            {/* Mobile Hamburger Toggle Button */}
+            <button
+              className="menu-button"
+              onClick={() => setOpen(!open)}
+              aria-label="Toggle navigation"
+              aria-expanded={open}
+            >
+              {open ? "✕" : "☰"}
+            </button>
           </div>
         </nav>
       </header>

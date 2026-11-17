@@ -10,20 +10,20 @@ export default function ChannelsPage() {
   // USSD Simulator State
   const [ussdInput, setUssdInput] = useState("*999#");
   const [ussdScreenText, setUssdScreenText] = useState(
-    "Setu Health (सेतु स्वास्थ्य)\n1. Check Symptoms (लक्षण)\n2. Book Clinic Visit\n3. Nearest Hospital/PHC\n4. My Next Appointment\n0. Exit"
+    "Sanketika (सांकेतिका)\n1. Check Symptoms (लक्षण)\n2. Book Clinic Visit\n3. Nearest Hospital/PHC\n4. My Next Appointment\n0. Exit"
   );
   const [ussdStep, setUssdStep] = useState(0);
 
   // SMS Simulator State
   const [smsLog, setSmsLog] = useState([
-    { from: "Setu Health", text: "Welcome to Setu SMS. Send 'BOOK' to schedule, 'TRIAGE' for health check, or 'CLINIC' for address." }
+    { from: "Sanketika", text: "Welcome to Sanketika SMS. Send 'BOOK' to schedule, 'TRIAGE' for health check, or 'CLINIC' for address." }
   ]);
   const [smsInput, setSmsInput] = useState("BOOK ANC CHC");
 
   // IVR Voice Call Simulator State
   const [ivrCallActive, setIvrCallActive] = useState(false);
   const [ivrPrompt, setIvrPrompt] = useState(
-    "Welcome to Setu Health Voice Care. हिन्दी के लिए 1 दबाएं. For English press 2."
+    "Welcome to Sanketika Voice Care. हिन्दी के लिए 1 दबाएं. For English press 2."
   );
 
   // Handle USSD Navigation
@@ -31,7 +31,7 @@ export default function ChannelsPage() {
     const val = inputVal || ussdInput;
     if (val === "*999#" || val === "0") {
       setUssdScreenText(
-        "Setu Health (सेतु स्वास्थ्य)\n1. Check Symptoms (लक्षण)\n2. Book Clinic Visit\n3. Nearest Hospital/PHC\n4. My Next Appointment\n0. Exit"
+        "Sanketika (सांकेतिका)\n1. Check Symptoms (लक्षण)\n2. Book Clinic Visit\n3. Nearest Hospital/PHC\n4. My Next Appointment\n0. Exit"
       );
       setUssdStep(0);
     } else if (val === "1") {
@@ -56,7 +56,7 @@ export default function ChannelsPage() {
       setUssdStep(4);
     } else if (val === "9") {
       setUssdScreenText(
-        "Setu Health (सेतु स्वास्थ्य)\n1. Check Symptoms (लक्षण)\n2. Book Clinic Visit\n3. Nearest Hospital/PHC\n4. My Next Appointment\n0. Exit"
+        "Sanketika (सांकेतिका)\n1. Check Symptoms (लक्षण)\n2. Book Clinic Visit\n3. Nearest Hospital/PHC\n4. My Next Appointment\n0. Exit"
       );
       setUssdStep(0);
     } else {
@@ -76,16 +76,16 @@ export default function ChannelsPage() {
     const upper = userMsg.toUpperCase();
     let reply = "";
     if (upper.includes("BOOK")) {
-      reply = "Setu Health: Booking reserved for Pooja Devi at Bishunpur CHC on Oct 18, 10:00 AM. Show this SMS at the registration counter.";
+      reply = "Sanketika: Booking reserved for Pooja Devi at Bishunpur CHC on Oct 18, 10:00 AM. Show this SMS at the registration counter.";
     } else if (upper.includes("TRIAGE") || upper.includes("FEVER")) {
-      reply = "Setu Triage: For fever with chills >2 days, visit Bishunpur CHC for Malaria blood test (RDT). Drink boiled water. For severe pain call 112.";
+      reply = "Sanketika Triage: For fever with chills >2 days, visit Bishunpur CHC for Malaria blood test (RDT). Drink boiled water. For severe pain call 112.";
     } else if (upper.includes("CLINIC")) {
-      reply = "Setu Directory: Bishunpur CHC is 3.2km away behind BDO office. Open 24x7. Emergency ambulance: 112 or 108.";
+      reply = "Sanketika Directory: Bishunpur CHC is 3.2km away behind BDO office. Open 24x7. Emergency ambulance: 112 or 108.";
     } else {
-      reply = "Setu Health: Command received. Reply BOOK to schedule, TRIAGE to check symptoms, or call 1800-SETU-HLTH for voice help.";
+      reply = "Sanketika: Command received. Reply BOOK to schedule, TRIAGE to check symptoms, or call 1800-SANKETIKA for voice help.";
     }
 
-    newLogs.push({ from: "Setu Health (56767)", text: reply });
+    newLogs.push({ from: "Sanketika (56767)", text: reply });
     setSmsLog(newLogs);
     setSmsInput("");
   };
@@ -97,12 +97,12 @@ export default function ChannelsPage() {
         window.speechSynthesis.cancel();
       }
       setIvrCallActive(false);
-      setIvrPrompt("Call ended. Thank you for using Setu Health.");
+      setIvrPrompt("Call ended. Thank you for using Sanketika.");
       return;
     }
 
     setIvrCallActive(true);
-    const initialText = "Welcome to Setu Health Voice Care. हिन्दी के लिए 1 दबाएं. For English press 2.";
+    const initialText = "Welcome to Sanketika Voice Care. हिन्दी के लिए 1 दबाएं. For English press 2.";
     setIvrPrompt(initialText);
 
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
@@ -115,7 +115,7 @@ export default function ChannelsPage() {
   const handleIvrKeyPress = (digit) => {
     let nextText = "";
     if (digit === "1") {
-      nextText = "सेतु स्वास्थ्य में आपका स्वागत है। डॉक्टर से समय लेने के लिए 1 दबाएं। आपातकालीन एम्बुलेंस के लिए 9 दबाएं।";
+      nextText = "सांकेतिका में आपका स्वागत है। डॉक्टर से समय लेने के लिए 1 दबाएं। आपातकालीन एम्बुलेंस के लिए 9 दबाएं।";
     } else if (digit === "2") {
       nextText = "Welcome to English menu. Press 1 to book doctor visit. Press 9 for emergency ambulance.";
     } else if (digit === "9") {
@@ -138,7 +138,7 @@ export default function ChannelsPage() {
       <SetuHeader />
       <main className="container" style={{ padding: "40px 0 80px" }}>
         <div style={{ textAlign: "center", marginBottom: "32px" }}>
-          <p className="eyebrow">THREE-TIER CHANNEL DEGRADATION SIMULATOR (§1, §3)</p>
+          <p className="eyebrow">THREE-TIER CHANNEL DEGRADATION SIMULATOR</p>
           <h1>Access Without a Smartphone</h1>
           <p style={{ maxWidth: "660px", margin: "8px auto 0" }}>
             In rural areas where 2G/3G drops or patients use basic feature phones, Setu provides 
