@@ -75,11 +75,11 @@ export default function SetuFooter() {
         </div>
 
         <div>
-          <h4>{isHi ? "पहुंच के माध्यम" : "Access Channels (§1, §3)"}</h4>
+          <h4>{isHi ? "पहुंच के माध्यम" : "Access Channels"}</h4>
           <Link href="/">{isHi ? "ऑफ़लाइन PWA ऐप" : "Offline PWA (Smartphones)"}</Link>
           <Link href="/channels">{isHi ? "एसएमएस सेवा (56767)" : "SMS Service (Reply to 56767)"}</Link>
           <Link href="/channels">{isHi ? "USSD त्वरित मेनू (*999#)" : "USSD (*999# Quick Menu)"}</Link>
-          <Link href="/channels">{isHi ? "IVR वॉयस हेल्पलाइन" : "IVR Voice Dial-in (1800-SETU-HLTH)"}</Link>
+          <Link href="/channels">{isHi ? "IVR वॉयस हेल्पलाइन" : "IVR Voice Dial-in (1800-SANKETIKA)"}</Link>
           <Link href="/chatbot">{isHi ? "सखी महिला चैटबॉट" : "Sakhi Women's Health Chatbot"}</Link>
         </div>
 
